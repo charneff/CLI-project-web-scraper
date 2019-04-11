@@ -1,5 +1,5 @@
 class Pose
-    attr_accessor :pose, :name, :url, :info
+    attr_accessor :pose, :name, :url
     @@all = []
 
     def initialize(name, url)

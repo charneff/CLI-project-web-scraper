@@ -5,7 +5,6 @@ require 'pry'
 class Cli 
 
     def run 
-        
         puts "Hi, friend!"
         puts "What brings you to your mat today?"
         line_break
@@ -15,6 +14,7 @@ class Cli
         display_poses 
         pose_menu 
         display_information
+        information_menu 
     end
 
     def line_break 
@@ -40,7 +40,7 @@ class Cli
     
         if !focus 
             line_break
-            puts "Invalid selection."
+            puts "Inmalid selection."
             puts "Try again, please!"
             menu
         elsif Pose.all == []
@@ -84,107 +84,48 @@ class Cli
 
     def display_information
         puts "About this Asana:"
+        
         Information.all.each do |information|
-            
-            if information.a != nil
-                puts "#{information.a}" if !information.a.start_with?("See also") 
+            if information.steps.start_with?("GO BACK")
+                break
             end
 
-            if information.b != nil
-                puts "#{information.b}" if !information.b.start_with?("See also")
-            end
-
-            if information.c != nil
-                puts "#{information.c}" if !information.c.start_with?("See also")
-            end
-
-            if information.d != nil 
-                puts "#{information.d}" if !information.d.start_with?("See also")
-            end 
-
-            if information.e != nil
-                puts "#{information.e}" if !information.e.start_with?("See also")
-            end
-
-            if information.f != nil 
-                puts "#{information.f}" if !information.f.start_with?("See also")
-            end
-
-            if information.g != nil
-                puts "#{information.g}" if !information.g.start_with?("See also")
-            end
-
-            if information.h != nil
-                puts "#{information.h}" if !information.h.start_with?("See also")
-            end
-
-            if information.i != nil
-                puts "#{information.i}" if !information.i.start_with?("See also")
-            end
-
-            if information.j != nil
-                puts "#{information.j}" if !information.j.start_with?("See also")
-            end 
-            
-            if information.k != nil
-                puts "#{information.k}" if !information.k.start_with?("See also")
-            end
-
-            if information.l != nil
-                puts "#{information.l}" if !information.l.start_with?("See also")
-            end 
-
-            if information.m != nil
-                puts "#{information.m}" if !information.m.start_with?("See also")
-            end
-
-            if information.n != nil
-                puts "#{information.n}" if !information.n.start_with?("See also")
-            end
-
-            if information.o != nil
-                puts "#{information.o}" if !information.o.start_with?("See also")
-            end
-
-            if information.q != nil
-                puts "#{information.q}" if !information.q.start_with?("See also")
-            end
-
-            if information.r != nil
-                puts "#{information.r}" if !information.r.start_with?("See also")
-            end
-
-            if information.s != nil
-                puts "#{information.s}" if !information.s.start_with?("See also")
-            end
-
-            if information.t != nil 
-                puts "#{information.t}" if !information.t.start_with?("See also") 
-            end
-
-            if information.u != nil
-                puts "#{information.u}" if !information.u.start_with?("See also") 
-            end
-
-            if information.v != nil 
-                puts "#{information.v}" if !information.v.start_with?("See also")
-            end
-
-            if information.w != nil 
-                puts "#{information.w}" if !information.w.start_with?("See also") 
-            end
-            
-            if information.x != nil
-                puts "#{information.x}" if !information.x.start_with?("See also")
-            end
-
-            if information.y != nil
-                puts "#{information.y}" if !information.y.start_with?("See also")
-            end
-
-            if information.z != nil
-                puts "#{information.z}" if !information.z.start_with?("See also")
+            if information.steps != nil
+                if !information.steps.start_with?("See also")
+                    puts "#{information.steps}"
+                end
             end
         end
     end
+
+
+    def information_menu
+        line_break
+        puts "Type 'F' to return to list of focuses."
+        puts "OR"
+        puts "Type 'P' to premious list of poses."
+        input = gets.chomp
+        line_break
+
+        if input == "F"
+            Pose.all.clear 
+            display_focuses
+            menu
+            display_poses
+            pose_menu
+            display_information 
+            information_menu
+        elsif input == "P"
+            Information.all.clear 
+            display_poses
+            pose_menu 
+            display_information 
+            information_menu
+        elsif input == "exit"
+            exit!
+        end
+
+    end
 end 
+
+ 

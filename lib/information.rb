@@ -1,33 +1,18 @@
 class Information 
-    attr_accessor :a, :b, :c, :d, :e, :f, :g, :h, :i, :j, :k, :l, :m, :n, :o, :q, :r, :s, :t, :u, :v, :w, :x, :y, :z
+    attr_accessor :steps
     @@all = []
 
-    def initialize(a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,q,r,s,t,u,v,w,y,z) 
-        @a = a
-        @b = b
-        @c = c
-        @d = d 
-        @e = e 
-        @f = f 
-        @g = g
-        @h = h
-        @i = i
-        @j = j
-        @k = k 
-        @l = l 
-        @m = m
-        @n = n
-        @o = o
-        @q = q 
-        @r = r 
-        @s = s 
-        @t = t
-        @u = u 
-        @v = v
-        @w = w
-        @x = x 
-        @y = y 
-        @z = z
+    def initialize(information) 
+        information.each do |key, value|
+            self.send("#{key}=", value)
+        end 
+            @@all << self 
+    end
+
+    def self.create_from_collection(information_array)
+        information_array.each do |info_hash|
+            Information.new(info_hash)
+        end
     end
 
     def self.all
