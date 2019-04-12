@@ -40,7 +40,7 @@ class Cli
     
         if !focus 
             line_break
-            puts "Invalid selection."
+            puts "I didn't understand that."
             puts "Try again, please!"
             menu
         elsif Pose.all == []
@@ -69,7 +69,7 @@ class Cli
 
         if !pose 
             puts "I didn't understand that."
-            puts "Please select a pose."
+            puts "Try again, please!"
             pose_menu
 
         elsif input == "*" 
@@ -78,6 +78,9 @@ class Cli
             menu
             display_poses
             pose_menu
+
+        elsif input == "exit"
+            exit!
 
         elsif Information.all == []
             Scraper.scrape_specific_pose(pose)
