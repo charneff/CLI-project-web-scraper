@@ -40,7 +40,7 @@ class Cli
     
         if !focus 
             line_break
-            puts "Inmalid selection."
+            puts "Invalid selection."
             puts "Try again, please!"
             menu
         elsif Pose.all == []
@@ -57,9 +57,11 @@ class Cli
 
     def pose_menu
         line_break
-        puts "Please select an asana for more information."
+        puts "Please select an asana # for more information."
         puts "OR"
         puts "Type '*' for previous menu."
+        puts "OR"
+        puts "Type 'exit' to exit"
         input = gets.chomp
         line_break
     
@@ -88,10 +90,10 @@ class Cli
         Information.all.each do |information|
             if information.steps.start_with?("GO BACK")
                 break
-            end
-
-            if information.steps != nil
-                if !information.steps.start_with?("See also")
+            elsif information.steps.start_with?(/[1..5]/)
+                break
+            elsif information.steps != nil
+                if !information.steps.start_with?("See also") && !information.steps.start_with?("See More")
                     puts "#{information.steps}"
                 end
             end
@@ -103,7 +105,9 @@ class Cli
         line_break
         puts "Type 'F' to return to list of focuses."
         puts "OR"
-        puts "Type 'P' to premious list of poses."
+        puts "Type '*' to previous list of poses."
+        puts "OR"
+        puts "Type 'exit' to exit"
         input = gets.chomp
         line_break
 
