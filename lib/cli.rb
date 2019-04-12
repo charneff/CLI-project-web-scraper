@@ -57,7 +57,7 @@ class Cli
 
     def pose_menu
         line_break
-        puts "Please select an asana # for more information."
+        puts "Please select an asana # for step-by-step instructions."
         puts "OR"
         puts "Type '*' for previous menu."
         puts "OR"
@@ -88,7 +88,7 @@ class Cli
     end
 
     def display_information
-        puts "About this Asana:"
+        puts "How to:"
         
         Information.all.each do |information|
             if information.steps.start_with?("GO BACK")
@@ -106,9 +106,9 @@ class Cli
 
     def information_menu
         line_break
-        puts "Type 'F' to return to list of focuses."
+        puts "Type 'F' to return to the list of focuses."
         puts "OR"
-        puts "Type '*' to previous list of poses."
+        puts "Type '*' to return to previous list of poses."
         puts "OR"
         puts "Type 'exit' to exit"
         input = gets.chomp
@@ -133,6 +133,4 @@ class Cli
         end
 
     end
-end 
-
- 
+end
